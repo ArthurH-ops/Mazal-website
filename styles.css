@@ -363,6 +363,7 @@ main {
 }
 
 /* Services Section */
+/* Services Section — clean two-column editorial layout */
 .services {
     padding: 6rem 0;
     background-color: var(--bg-white);
@@ -373,114 +374,119 @@ main {
     text-align: center;
     font-size: 2.25rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 3.5rem;
     color: var(--primary-color);
 }
 
-.services-subtitle {
-    text-align: center;
-    color: var(--text-light);
-    font-size: 1.1rem;
-    margin-bottom: 4rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.service-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.75rem;
-    max-width: 900px;
+.service-list {
+    max-width: 1060px;
     margin: 0 auto;
 }
 
 .service-item {
-    background-color: var(--bg-white);
-    padding: 2.5rem 3rem;
-    border-radius: 16px;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-light);
-    transition: all var(--transition-smooth);
-    position: relative;
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 2.5rem 3.5rem;
+    align-items: start;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border-light);
     scroll-margin-top: 120px;
+    transition: border-color var(--transition-smooth);
+}
+
+.service-item:first-child {
+    padding-top: 0;
+}
+
+.service-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 [data-theme="dark"] .service-item {
-    background-color: #1e2533;
     border-color: var(--border-color);
 }
 
-.service-description {
-    color: var(--text-light);
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin-bottom: 1.75rem;
-    text-align: center;
-}
-
-.service-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
-    opacity: 0;
-    transition: opacity var(--transition-base);
-}
-
-.service-item:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-    border-color: transparent;
-}
-
-.service-item:hover::before {
-    opacity: 1;
+.service-intro {
+    position: sticky;
+    top: 120px;
 }
 
 .service-item h3 {
     color: var(--primary-color);
     margin-bottom: 1rem;
-    font-size: 1.375rem;
-    font-weight: 600;
-    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    position: relative;
+    padding-bottom: 0.75rem;
 }
 
-.service-item ul {
+.service-item h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+.service-description {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.75;
+}
+
+.service-details ul {
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 0.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
-.service-item li {
-    padding: 0.625rem 0;
+.service-details li {
+    padding: 0.6rem 0;
     padding-left: 1.5rem;
     position: relative;
     color: var(--text-dark);
     font-size: 0.9rem;
-    line-height: 1.5;
+    line-height: 1.55;
+    border-bottom: 1px solid var(--border-light);
+    transition: background-color 0.2s ease, border-color var(--transition-smooth);
+}
+
+[data-theme="dark"] .service-details li {
+    border-color: var(--border-color);
+}
+
+.service-details li:last-child {
     border-bottom: none;
 }
 
-.service-item li::before {
+.service-details li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
     width: 6px;
     height: 6px;
     background-color: var(--accent-color);
     border-radius: 50%;
     opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.service-item li:last-child {
-    border-bottom: none;
+.service-details li:hover {
+    background-color: var(--bg-light);
+    border-radius: 4px;
+}
+
+.service-details li:hover::before {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.3);
 }
 
 
@@ -756,12 +762,10 @@ footer {
         padding: 0.4rem 1rem;
     }
     
-    .service-grid {
-        gap: 1.5rem;
-    }
-    
     .service-item {
-        padding: 2rem;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 2rem 2.5rem;
+        padding: 2.5rem 0;
     }
     
     .team {
@@ -1268,8 +1272,8 @@ button:focus {
         display: none;
     }
 
-    .service-item:hover {
-        transform: none;
+    .service-details li:hover {
+        background-color: transparent;
     }
 
     .team-member:hover {
@@ -1357,34 +1361,32 @@ button:focus {
     }
 
     .service-item {
-        padding: 1.5rem;
-        border-radius: 12px;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding: 2rem 0;
+    }
+
+    .service-intro {
+        position: static;
     }
 
     .service-item h3 {
-        font-size: 1.15rem;
+        font-size: 1.2rem;
     }
 
     .service-description {
         font-size: 0.875rem;
-        margin-bottom: 1.25rem;
     }
 
-    .service-item ul {
-        grid-template-columns: 1fr;
-        gap: 0.25rem;
-    }
-
-    .service-item li {
+    .service-details li {
         font-size: 0.825rem;
         padding: 0.5rem 0;
         padding-left: 1.25rem;
     }
 
-    .service-item li::before {
+    .service-details li::before {
         width: 5px;
         height: 5px;
-        top: 0.75rem;
     }
 
     .team {
@@ -1546,11 +1548,13 @@ button:focus {
     }
 
     .service-item {
-        padding: 2rem 2.5rem;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2.5rem 0;
     }
 
-    .service-item ul {
-        grid-template-columns: 1fr;
+    .service-intro {
+        position: static;
     }
 
     .contact-layout {
@@ -1583,8 +1587,8 @@ button:focus {
         font-size: 2.5rem;
     }
 
-    .service-grid {
-        max-width: 800px;
+    .service-list {
+        max-width: 900px;
     }
 
     .contact-layout {
@@ -1673,7 +1677,7 @@ button:focus {
     }
 
     .service-item {
-        border-width: 2px;
+        border-bottom-width: 2px;
     }
 
     .nav-links a::after {
@@ -1715,7 +1719,6 @@ button:focus {
     .service-item, .team-member, .contact-left, .contact-info-box {
         break-inside: avoid;
         box-shadow: none;
-        border: 1px solid #ccc;
     }
 
     a[href]::after {
@@ -1740,7 +1743,6 @@ button:focus {
 }
 
 /* Hardware acceleration for animations */
-.service-item,
 .team-member,
 .hero-features a,
 .form-submit,
@@ -1839,36 +1841,6 @@ button:focus {
     transform: translateY(-2px);
 }
 
-/* Service Accordion Styles */
-.service-item ul li.accordion-hidden {
-    display: none;
-}
-
-.service-expand-btn {
-    display: block;
-    margin: 1.5rem auto 0;
-    padding: 0.75rem 2rem;
-    background: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition-base);
-    font-family: inherit;
-}
-
-.service-expand-btn:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-.service-expand-btn:active {
-    transform: translateY(0);
-}
 
 /* Number Counter Styles */
 .counter-number {
@@ -1899,13 +1871,6 @@ button:focus {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-.service-item {
-    transform: translateZ(0);
-}
-
-.service-item:hover {
-    transform: translateY(-4px) scale(1.01);
-}
 
 .team-member {
     transform: translateZ(0);
@@ -2006,11 +1971,6 @@ button:focus {
         font-size: 1.25rem;
     }
 
-    .service-expand-btn {
-        padding: 0.625rem 1.5rem;
-        font-size: 0.85rem;
-    }
-
     .counter-number {
         font-size: 2.25rem;
     }
@@ -2018,10 +1978,6 @@ button:focus {
     /* Disable scale effects on touch devices */
     @media (hover: none) and (pointer: coarse) {
         .hero-features a:hover {
-            transform: translateY(0) scale(1);
-        }
-
-        .service-item:hover {
             transform: translateY(0) scale(1);
         }
 

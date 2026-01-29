@@ -115,9 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize back to top button
     initBackToTop();
 
-    // Initialize service accordions
-    initServiceAccordions();
-
     // Initialize number counters
     initNumberCounters();
 });
@@ -336,65 +333,6 @@ function initBackToTop() {
     });
 }
 
-// Service Accordions
-function initServiceAccordions() {
-    const serviceItems = document.querySelectorAll('.service-item');
-
-    serviceItems.forEach(item => {
-        const listItems = item.querySelectorAll('ul li');
-
-        // Only create accordion if there are more than 3 items
-        if (listItems.length > 3) {
-            // Hide items after the first 3
-            listItems.forEach((li, index) => {
-                if (index >= 3) {
-                    li.classList.add('accordion-hidden');
-                }
-            });
-
-            // Create expand button
-            const expandBtn = document.createElement('button');
-            expandBtn.className = 'service-expand-btn';
-            expandBtn.innerHTML = currentLang === 'de' ? 'Mehr anzeigen' : 'Show more';
-            expandBtn.setAttribute('data-de', 'Mehr anzeigen');
-            expandBtn.setAttribute('data-en', 'Show more');
-            expandBtn.setAttribute('data-de-less', 'Weniger anzeigen');
-            expandBtn.setAttribute('data-en-less', 'Show less');
-
-            // Insert button after the list
-            const list = item.querySelector('ul');
-            list.parentNode.insertBefore(expandBtn, list.nextSibling);
-
-            // Toggle expand/collapse
-            expandBtn.addEventListener('click', () => {
-                const isExpanded = item.classList.contains('expanded');
-
-                listItems.forEach((li, index) => {
-                    if (index >= 3) {
-                        if (isExpanded) {
-                            li.classList.add('accordion-hidden');
-                        } else {
-                            li.classList.remove('accordion-hidden');
-                        }
-                    }
-                });
-
-                item.classList.toggle('expanded');
-
-                // Update button text
-                if (item.classList.contains('expanded')) {
-                    expandBtn.innerHTML = currentLang === 'de'
-                        ? expandBtn.getAttribute('data-de-less')
-                        : expandBtn.getAttribute('data-en-less');
-                } else {
-                    expandBtn.innerHTML = currentLang === 'de'
-                        ? expandBtn.getAttribute('data-de')
-                        : expandBtn.getAttribute('data-en');
-                }
-            });
-        }
-    });
-}
 
 // Number Counter Animation
 function initNumberCounters() {
