@@ -1225,3 +1225,542 @@ button:focus {
     line-height: 1.8;
     margin-bottom: 0.5rem;
 }
+
+/* ============================================
+   COMPREHENSIVE RESPONSIVE & CROSS-BROWSER
+   OPTIMIZATIONS
+   ============================================ */
+
+/* Base touch and mobile optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Touch device optimizations - remove hover effects that don't work well */
+    .nav-links a::after {
+        display: none;
+    }
+
+    .service-item:hover {
+        transform: none;
+    }
+
+    .team-member:hover {
+        transform: none;
+    }
+
+    .hero-features a:hover {
+        transform: none;
+    }
+
+    /* Larger tap targets for touch */
+    .nav-links a {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .lang-toggle, .theme-toggle {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cookie-btn {
+        min-height: 44px;
+    }
+
+    .form-submit {
+        min-height: 48px;
+    }
+
+    /* Prevent text selection on interactive elements */
+    button, a {
+        -webkit-user-select: none;
+        user-select: none;
+    }
+}
+
+/* Small phones (max-width: 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    main {
+        margin-top: 140px;
+    }
+
+    .hero {
+        padding: 4rem 0 3.5rem;
+    }
+
+    .hero h2 {
+        font-size: 1.625rem;
+        line-height: 1.3;
+        margin-bottom: 1rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-features {
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .hero-features a {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.875rem;
+    }
+
+    .services, .about, .contact {
+        padding: 3.5rem 0;
+    }
+
+    .services h2, .about h2, .contact h2 {
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .contact h2 {
+        margin-bottom: 2rem;
+    }
+
+    .service-item {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .service-item h3 {
+        font-size: 1.15rem;
+    }
+
+    .service-description {
+        font-size: 0.875rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .service-item ul {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .service-item li {
+        font-size: 0.825rem;
+        padding: 0.5rem 0;
+        padding-left: 1.25rem;
+    }
+
+    .service-item li::before {
+        width: 5px;
+        height: 5px;
+        top: 0.75rem;
+    }
+
+    .team {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .team-member {
+        width: 100%;
+        max-width: 100%;
+        min-width: auto;
+        padding: 2rem 1.5rem;
+    }
+
+    .contact-layout {
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .contact-left {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .contact-info-box {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .contact-info-box h3 {
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-info-item {
+        margin-bottom: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
+
+    .contact-info-item p {
+        font-size: 0.85rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 0.75rem;
+        font-size: 16px; /* Prevents zoom on iOS */
+        border-radius: 8px;
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+    }
+
+    .checkbox-label {
+        font-size: 0.8rem;
+    }
+
+    .form-submit {
+        padding: 0.875rem 2rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+
+    .map-container {
+        border-radius: 12px;
+    }
+
+    .map-container iframe {
+        height: 280px;
+        border-radius: 12px;
+    }
+
+    footer {
+        padding: 2rem 0;
+    }
+
+    .footer-info p {
+        font-size: 0.8rem;
+    }
+
+    .footer-links {
+        gap: 0.75rem;
+    }
+
+    .footer-links a {
+        font-size: 0.8rem;
+    }
+
+    .cookie-banner {
+        padding: 1rem 0;
+    }
+
+    .cookie-text h4 {
+        font-size: 1rem;
+    }
+
+    .cookie-text p {
+        font-size: 0.8rem;
+    }
+
+    .cookie-btn {
+        padding: 0.625rem 1rem;
+        font-size: 0.8rem;
+        min-width: 100px;
+    }
+
+    /* Legal pages mobile */
+    .legal-page {
+        padding: 3rem 0 2rem;
+    }
+
+    .legal-page h1 {
+        font-size: 1.75rem;
+    }
+
+    .legal-content h2 {
+        font-size: 1.25rem;
+    }
+
+    .legal-content p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet Portrait (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .header-content {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .main-nav {
+        flex-direction: row;
+        width: auto;
+    }
+
+    .nav-links {
+        order: 0;
+        width: auto;
+    }
+
+    .nav-controls {
+        order: 0;
+        align-self: center;
+    }
+
+    main {
+        margin-top: 80px;
+    }
+
+    .hero {
+        padding: 5rem 0 4rem;
+    }
+
+    .hero h2 {
+        font-size: 2.25rem;
+    }
+
+    .service-item {
+        padding: 2rem 2.5rem;
+    }
+
+    .service-item ul {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .contact-left, .contact-info-box {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .team {
+        justify-content: center;
+    }
+
+    .team-member {
+        flex: 0 1 calc(50% - 1.25rem);
+        min-width: 260px;
+    }
+}
+
+/* iPad Pro and larger tablets (1024px - 1366px) */
+@media (min-width: 1024px) and (max-width: 1366px) {
+    .container {
+        max-width: 960px;
+    }
+
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+
+    .service-grid {
+        max-width: 800px;
+    }
+
+    .contact-layout {
+        max-width: 900px;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Landscape orientation for phones */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        padding: 3rem 0;
+    }
+
+    .hero h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-features {
+        margin-top: 1rem;
+    }
+
+    main {
+        margin-top: 70px;
+    }
+
+    header {
+        padding: 0.5rem 0;
+    }
+
+    .header-logo {
+        height: 35px;
+    }
+}
+
+/* Safe area insets for notched devices (iPhone X+) */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+
+    .cookie-banner {
+        padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    }
+
+    footer {
+        padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
+    }
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-touch-callout: none) {
+    /* Fix for Safari flexbox gap issues in older versions */
+    .hero-features {
+        margin: -0.5rem;
+    }
+
+    .hero-features a {
+        margin: 0.5rem;
+    }
+
+    /* Smooth scrolling fix for Safari */
+    html {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Fix for backdrop-filter in Safari */
+    header {
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --text-light: #333333;
+    }
+
+    .service-item {
+        border-width: 2px;
+    }
+
+    .nav-links a::after {
+        height: 3px;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Print styles */
+@media print {
+    header, footer, .cookie-banner, .nav-controls {
+        display: none !important;
+    }
+
+    main {
+        margin-top: 0;
+    }
+
+    .hero {
+        background: #1a365d !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .service-item, .team-member, .contact-left, .contact-info-box {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+
+    .map-container {
+        display: none;
+    }
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Hardware acceleration for animations */
+.service-item,
+.team-member,
+.hero-features a,
+.form-submit,
+.lang-toggle,
+.theme-toggle {
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* Selection color */
+::selection {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+::-moz-selection {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* Scrollbar styling for WebKit browsers */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-light);
+}
+
+[data-theme="dark"]::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+[data-theme="dark"]::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) var(--bg-light);
+}
