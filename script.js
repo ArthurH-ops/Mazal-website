@@ -253,18 +253,9 @@ function handleFormSubmit(e) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const data = {
-        firstname: formData.get('firstname'),
-        lastname: formData.get('lastname'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        subject: formData.get('subject'),
-        message: formData.get('message'),
-        privacy: formData.get('privacy')
-    };
 
     // Basic validation
-    if (!data.firstname || !data.lastname || !data.email || !data.message || !data.privacy) {
+    if (!formData.get('firstname') || !formData.get('lastname') || !formData.get('email') || !formData.get('message') || !formData.get('privacy')) {
         alert(currentLang === 'de'
             ? 'Bitte füllen Sie alle Pflichtfelder aus und stimmen Sie der Datenschutzerklärung zu.'
             : 'Please fill in all required fields and agree to the privacy policy.'
@@ -272,26 +263,38 @@ function handleFormSubmit(e) {
         return;
     }
 
-    // Show success message (Form is now handled by Formspree)
     const submitBtn = e.target.querySelector('.form-submit');
     const originalText = submitBtn.textContent;
 
     submitBtn.disabled = true;
     submitBtn.textContent = currentLang === 'de' ? 'Wird gesendet...' : 'Sending...';
 
-    // Note: When Formspree is configured, the form will submit naturally
-    // For now, we'll show a message
-    setTimeout(() => {
+    fetch(e.target.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+        if (response.ok) {
+            alert(currentLang === 'de'
+                ? 'Vielen Dank für Ihre Nachricht! Wir werden uns bald bei Ihnen melden.'
+                : 'Thank you for your message! We will get back to you soon.'
+            );
+            e.target.reset();
+        } else {
+            throw new Error('Form submission failed');
+        }
+    })
+    .catch(() => {
         alert(currentLang === 'de'
-            ? 'Vielen Dank für Ihre Nachricht! Wir werden uns bald bei Ihnen melden.'
-            : 'Thank you for your message! We will get back to you soon.'
+            ? 'Es gab einen Fehler beim Senden. Bitte versuchen Sie es erneut.'
+            : 'There was an error sending your message. Please try again.'
         );
-
-        // Reset form
-        e.target.reset();
+    })
+    .finally(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
-    }, 1500);
+    });
 }
 
 // Hero Parallax Effect
