@@ -153,14 +153,6 @@ function initScrollReveal() {
         });
     }, observerOptions);
 
-    // Observe service items
-    document.querySelectorAll('.service-item').forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-        observer.observe(el);
-    });
-
     // Observe team members
     document.querySelectorAll('.team-member').forEach((el, index) => {
         el.style.opacity = '0';
