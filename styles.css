@@ -59,9 +59,24 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    opacity: 0;
+    animation: pageLoad 0.6s ease-out forwards;
+}
+
+body.page-loaded {
+    opacity: 1;
 }
 
 /* Smooth reveal animations */
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -86,6 +101,18 @@ body {
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
     }
 }
 
@@ -258,11 +285,14 @@ main {
 /* Hero Section */
 .hero {
     background: linear-gradient(160deg, var(--primary-color) 0%, var(--secondary-color) 50%, #1e4976 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
     color: white;
     padding: 6rem 0 5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
+    will-change: transform;
 }
 
 .hero::before {
@@ -1763,4 +1793,255 @@ button:focus {
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--border-color) var(--bg-light);
+}
+
+/* ============================================
+   ENHANCED FEATURES
+   ============================================ */
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px);
+    transition: all var(--transition-smooth);
+    box-shadow: var(--shadow-lg);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.back-to-top:active {
+    transform: translateY(-2px);
+}
+
+/* Service Accordion Styles */
+.service-item ul li.accordion-hidden {
+    display: none;
+}
+
+.service-expand-btn {
+    display: block;
+    margin: 1.5rem auto 0;
+    padding: 0.75rem 2rem;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    font-family: inherit;
+}
+
+.service-expand-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.service-expand-btn:active {
+    transform: translateY(0);
+}
+
+/* Number Counter Styles */
+.counter-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: inline-block;
+    transition: all var(--transition-smooth);
+}
+
+/* Enhanced Hover Micro-interactions */
+.nav-links a {
+    transform: translateZ(0);
+    transition: all var(--transition-base);
+}
+
+.nav-links a:hover {
+    transform: translateY(-1px);
+}
+
+.hero-features a {
+    transform: translateZ(0);
+    transition: all var(--transition-smooth);
+}
+
+.hero-features a:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.service-item {
+    transform: translateZ(0);
+}
+
+.service-item:hover {
+    transform: translateY(-4px) scale(1.01);
+}
+
+.team-member {
+    transform: translateZ(0);
+}
+
+.team-member:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.form-submit {
+    transform: translateZ(0);
+}
+
+.form-submit:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.lang-toggle,
+.theme-toggle {
+    transform: translateZ(0);
+}
+
+.lang-toggle:hover,
+.theme-toggle:hover {
+    transform: translateY(-2px) scale(1.05);
+}
+
+.cookie-btn {
+    transform: translateZ(0);
+}
+
+.cookie-btn.accept:hover {
+    transform: translateY(-2px) scale(1.05);
+}
+
+.cookie-btn.decline:hover {
+    transform: translateY(-1px) scale(1.02);
+}
+
+/* Enhanced shadows on focus */
+.form-group input:focus,
+.form-group textarea:focus {
+    box-shadow: 0 0 0 4px rgba(26, 54, 93, 0.12), var(--shadow-md);
+}
+
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group textarea:focus {
+    box-shadow: 0 0 0 4px rgba(66, 153, 225, 0.2), var(--shadow-md);
+}
+
+/* Map hover effect */
+.map-container {
+    transition: all var(--transition-smooth);
+}
+
+.map-container:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px);
+}
+
+/* Contact info item hover */
+.contact-info-item {
+    transition: all var(--transition-base);
+}
+
+.contact-info-item:hover {
+    transform: translateX(3px);
+}
+
+/* Footer links enhanced */
+.footer-links a {
+    position: relative;
+    transition: all var(--transition-base);
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: white;
+    transition: width var(--transition-base);
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Responsive adjustments for enhanced features */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.25rem;
+    }
+
+    .service-expand-btn {
+        padding: 0.625rem 1.5rem;
+        font-size: 0.85rem;
+    }
+
+    .counter-number {
+        font-size: 2.25rem;
+    }
+
+    /* Disable scale effects on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+        .hero-features a:hover {
+            transform: translateY(0) scale(1);
+        }
+
+        .service-item:hover {
+            transform: translateY(0) scale(1);
+        }
+
+        .team-member:hover {
+            transform: translateY(0) scale(1);
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .back-to-top {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+    }
+
+    .counter-number {
+        font-size: 2rem;
+    }
 }

@@ -1,3 +1,8 @@
+// Page Loading Animation
+window.addEventListener('load', () => {
+    document.body.classList.add('page-loaded');
+});
+
 // Theme Toggle
 function toggleTheme() {
     const body = document.body;
@@ -5,7 +10,7 @@ function toggleTheme() {
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     body.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-    
+
     // Update theme toggle button icon
     updateThemeButton(newTheme);
 }
@@ -103,6 +108,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update form placeholders
     updatePlaceholders();
+
+    // Initialize parallax effect
+    initParallaxEffect();
+
+    // Initialize back to top button
+    initBackToTop();
+
+    // Initialize service accordions
+    initServiceAccordions();
+
+    // Initialize number counters
+    initNumberCounters();
 });
 
 // Header scroll effect
@@ -226,7 +243,7 @@ function hideCookieBanner() {
 // Contact Form Functions
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
-    
+
     if (contactForm) {
         contactForm.addEventListener('submit', handleFormSubmit);
     }
@@ -255,14 +272,15 @@ function handleFormSubmit(e) {
         return;
     }
 
-    // Show success message (in a real implementation, you would send the data to a server)
+    // Show success message (Form is now handled by Formspree)
     const submitBtn = e.target.querySelector('.form-submit');
     const originalText = submitBtn.textContent;
 
     submitBtn.disabled = true;
     submitBtn.textContent = currentLang === 'de' ? 'Wird gesendet...' : 'Sending...';
 
-    // Simulate form submission
+    // Note: When Formspree is configured, the form will submit naturally
+    // For now, we'll show a message
     setTimeout(() => {
         alert(currentLang === 'de'
             ? 'Vielen Dank für Ihre Nachricht! Wir werden uns bald bei Ihnen melden.'
@@ -274,5 +292,147 @@ function handleFormSubmit(e) {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
     }, 1500);
+}
+
+// Hero Parallax Effect
+function initParallaxEffect() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxSpeed = 0.5;
+        hero.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+    }, { passive: true });
+}
+
+// Back to Top Button
+function initBackToTop() {
+    // Create back to top button
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.setAttribute('aria-label', 'Back to top');
+    backToTopBtn.innerHTML = '↑';
+    document.body.appendChild(backToTopBtn);
+
+    // Show/hide based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 500) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    // Smooth scroll to top
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Service Accordions
+function initServiceAccordions() {
+    const serviceItems = document.querySelectorAll('.service-item');
+
+    serviceItems.forEach(item => {
+        const listItems = item.querySelectorAll('ul li');
+
+        // Only create accordion if there are more than 3 items
+        if (listItems.length > 3) {
+            // Hide items after the first 3
+            listItems.forEach((li, index) => {
+                if (index >= 3) {
+                    li.classList.add('accordion-hidden');
+                }
+            });
+
+            // Create expand button
+            const expandBtn = document.createElement('button');
+            expandBtn.className = 'service-expand-btn';
+            expandBtn.innerHTML = currentLang === 'de' ? 'Mehr anzeigen' : 'Show more';
+            expandBtn.setAttribute('data-de', 'Mehr anzeigen');
+            expandBtn.setAttribute('data-en', 'Show more');
+            expandBtn.setAttribute('data-de-less', 'Weniger anzeigen');
+            expandBtn.setAttribute('data-en-less', 'Show less');
+
+            // Insert button after the list
+            const list = item.querySelector('ul');
+            list.parentNode.insertBefore(expandBtn, list.nextSibling);
+
+            // Toggle expand/collapse
+            expandBtn.addEventListener('click', () => {
+                const isExpanded = item.classList.contains('expanded');
+
+                listItems.forEach((li, index) => {
+                    if (index >= 3) {
+                        if (isExpanded) {
+                            li.classList.add('accordion-hidden');
+                        } else {
+                            li.classList.remove('accordion-hidden');
+                        }
+                    }
+                });
+
+                item.classList.toggle('expanded');
+
+                // Update button text
+                if (item.classList.contains('expanded')) {
+                    expandBtn.innerHTML = currentLang === 'de'
+                        ? expandBtn.getAttribute('data-de-less')
+                        : expandBtn.getAttribute('data-en-less');
+                } else {
+                    expandBtn.innerHTML = currentLang === 'de'
+                        ? expandBtn.getAttribute('data-de')
+                        : expandBtn.getAttribute('data-en');
+                }
+            });
+        }
+    });
+}
+
+// Number Counter Animation
+function initNumberCounters() {
+    const counters = document.querySelectorAll('.counter-number');
+
+    if (counters.length === 0) return;
+
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const targetValue = parseInt(target.getAttribute('data-target'));
+                animateCounter(target, targetValue);
+                observer.unobserve(target);
+            }
+        });
+    }, observerOptions);
+
+    counters.forEach(counter => observer.observe(counter));
+}
+
+function animateCounter(element, target) {
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    const stepDuration = duration / steps;
+
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current);
+        }
+    }, stepDuration);
 }
 
