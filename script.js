@@ -59,6 +59,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update theme button for current theme
     updateThemeButton(savedTheme);
 
+    // Add event listeners for toggle buttons
+    const themeToggle = document.getElementById('themeToggle');
+    const langToggle = document.getElementById('langToggle');
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    if (langToggle) {
+        langToggle.addEventListener('click', toggleLanguage);
+    }
+
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -264,6 +276,3 @@ function handleFormSubmit(e) {
     }, 1500);
 }
 
-// Expose functions to global scope for onclick handlers
-window.toggleTheme = toggleTheme;
-window.toggleLanguage = toggleLanguage;
