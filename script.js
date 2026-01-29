@@ -263,3 +263,7 @@ function handleFormSubmit(e) {
         submitBtn.textContent = originalText;
     }, 1500);
 }
+
+// Expose functions to global scope for onclick handlers
+window.toggleTheme = toggleTheme;
+window.toggleLanguage = toggleLanguage;
