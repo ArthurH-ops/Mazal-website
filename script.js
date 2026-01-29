@@ -32,7 +32,12 @@ function toggleLanguage() {
 
     // Update all elements with language attributes
     document.querySelectorAll('[data-de][data-en]').forEach(element => {
-        element.textContent = element.getAttribute(`data-${currentLang}`);
+        const value = element.getAttribute(`data-${currentLang}`);
+        if (value.includes('<')) {
+            element.innerHTML = value;
+        } else {
+            element.textContent = value;
+        }
     });
 
     // Update HTML lang attribute
